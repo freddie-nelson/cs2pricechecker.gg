@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+    --side-padding: 20vw;
+}
+
+@media screen and (max-width: 960px) {
+    :root {
+        --side-padding: 10vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    :root {
+        --side-padding: 5vw;
+    }
+}
+
+body {
+    @apply bg-bg text-text w-full min-h-screen font-[Inter] selection:bg-primary selection:text-text;
+}

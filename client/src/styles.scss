@@ -1,6 +1,0 @@
-@import "tailwindcss";
-@config "../tailwind.config.js";
-
-body {
-    @apply bg-bg text-text w-full min-h-screen;
-}
