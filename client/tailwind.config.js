@@ -11,6 +11,15 @@ module.exports = {
                 lightbg: "#1B2337",
                 text: "#FFFFFF",
             },
+            keyframes: {
+                grow: {
+                    "0%": { transform: "scale(0.95)" },
+                    "100%": { transform: "scale(1.1)" },
+                },
+            },
+            animation: {
+                grow: "grow 3s ease-in-out infinite alternate",
+            },
         },
     },
     plugins: [],
