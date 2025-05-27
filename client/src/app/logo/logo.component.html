@@ -1,4 +1,9 @@
 <div class="flex items-center gap-2.5">
-    <app-icon class="text-primary" icon="mdi:knife-military" width="2.25rem" height="2.25rem"></app-icon>
-    <p class="text-base font-semibold">{{ appName }}</p>
+    <app-icon
+        class="text-primary"
+        icon="mdi:knife-military"
+        width="{{ size === 'lg' ? '3rem' : '2.25rem' }}"
+        height="{{ size === 'lg' ? '3rem' : '2.25rem' }}"
+    ></app-icon>
+    <p class="font-semibold {{ size === 'lg' ? 'text-2xl' : 'text-base ' }}">{{ appName }}</p>
 </div>

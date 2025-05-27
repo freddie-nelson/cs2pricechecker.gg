@@ -1,14 +1,18 @@
-<div class="bg-lightbg text-text flex items-center gap-2.5 rounded-md p-2.5 group">
+<div
+    class="bg-lightbg text-text flex items-center rounded-md group {{ size === 'lg' ? 'p-3 gap-3' : 'p-2.5 gap-2.5' }}"
+>
     <app-icon
         class="group-focus-within:opacity-100 opacity-50 transition-opacity duration-200"
         icon="cuida:search-outline"
-        width="1.25rem"
-        height="1.25rem"
+        width="{{ size === 'lg' ? '1.75rem' : '1.25rem' }}"
+        height="{{ size === 'lg' ? '1.75rem' : '1.25rem' }}"
     ></app-icon>
 
     <form class="w-full" (ngSubmit)="onSearch($event)">
         <input
-            class="outline-none border-none bg-transparent focus:valid:opacity-100 opacity-50 transition-opacity duration-200 flex-grow text-sm"
+            class="{{
+                size === 'lg' ? 'text-base' : 'text-sm'
+            }} outline-none border-none bg-transparent focus:valid:opacity-100 opacity-50 transition-opacity duration-200 flex-grow w-full"
             type="text"
             placeholder="Weapon name, skin, or user..."
             name="search"

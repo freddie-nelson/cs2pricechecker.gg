@@ -2,21 +2,37 @@
 @config "../tailwind.config.js";
 
 :root {
-    --side-padding: 20vw;
+    --side-padding: 17vw;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1500px) {
+    :root {
+        --side-padding: 13vw;
+    }
+}
+
+@media screen and (max-width: 1200px) {
     :root {
         --side-padding: 10vw;
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     :root {
-        --side-padding: 5vw;
+        --side-padding: 1.5rem;
     }
 }
 
+@media screen and (max-width: 600px) {
+    :root {
+        --side-padding: 0.75rem;
+    }
+}
+
+html {
+    @apply h-full;
+}
+
 body {
-    @apply bg-bg text-text w-full min-h-screen font-[Inter,Arial,sans-serif] selection:bg-primary selection:text-text;
+    @apply bg-bg text-text w-full min-h-full h-full font-[Inter,Arial,sans-serif] selection:bg-primary selection:text-text;
 }
