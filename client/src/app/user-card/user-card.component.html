@@ -1,0 +1,26 @@
+<div class="rounded-md p-2 w-80 h-36 bg-lightbg flex gap-2">
+    <img
+        [src]="user.profilePicUrl"
+        alt="{{ user.name }}'s Profile Picture"
+        class="rounded-md h-full w-auto aspect-square object-cover"
+        width="256px"
+        height="256px"
+    />
+
+    <div class="flex flex-col gap-1.5">
+        <p class="text-base font-semibold">{{ user.name }}</p>
+
+        @for (market of markets; track market) {
+            <div class="flex items-center gap-1.5">
+                <img
+                    [src]="'/images/' + market + '-icon.webp'"
+                    alt="{{ market }} Icon"
+                    width="16"
+                    height="16"
+                    class="w-4 h-4"
+                />
+                <p class="text-sm opacity-70">{{ $any(user)[market + "Price"] | currency }}</p>
+            </div>
+        }
+    </div>
+</div>

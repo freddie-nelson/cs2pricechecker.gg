@@ -36,3 +36,11 @@ html {
 body {
     @apply bg-bg text-text w-full min-h-full h-full font-[Inter,Arial,sans-serif] selection:bg-primary selection:text-text;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+    @apply w-2.5 h-2.5 bg-lightbg rounded-sm;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-lighterbg rounded-sm;
+}

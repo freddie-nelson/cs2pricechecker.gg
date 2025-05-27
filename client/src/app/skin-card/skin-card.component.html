@@ -1,0 +1,45 @@
+<div class="w-full min-w-xl h-[17rem] flex gap-2 rounded-md p-2 bg-lightbg">
+    <div class="relative p-2 h-full aspect-square rounded-md bg-mediumbg overflow-hidden">
+        <img
+            [src]="skin.imageUrl"
+            alt="{{ skin.name }} Image"
+            class="rounded-md h-full w-full object-contain"
+            width="256px"
+            height="256px"
+        />
+
+        <div class="absolute bottom-0 left-0 w-full h-auto flex flex-col gap-0.5 p-2">
+            <p class="text-sm font-semibold">
+                {{ skin.name }}
+            </p>
+            <p class="text-sm opacity-50">
+                {{ skin.quality }}
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-col gap-2 flex-grow">
+        <div class="flex gap-2">
+            @for (market of markets; track market) {
+                <button
+                    class="relative flex items-center justify-center w-full h-10 overflow-hidden rounded-md cursor-pointer outline-none border-none transition-colors duration-200 group {{
+                        activeMarket === market ? 'bg-secondary' : 'bg-mediumbg'
+                    }}"
+                    (click)="activeMarket = market"
+                >
+                    <img
+                        src="/images/{{ market }}-logo.webp"
+                        alt="{{ market }} Logo"
+                        class="h-full w-full object-contain absolute p-1.5 group-hover:opacity-100 transition-opacity duration-200 {{
+                            activeMarket === market ? 'opacity-100' : 'opacity-50'
+                        }}"
+                        width="100%"
+                        height="100%"
+                    />
+                </button>
+            }
+        </div>
+
+        <div class="flex flex-col w-full h-full bg-mediumbg rounded-md"></div>
+    </div>
+</div>

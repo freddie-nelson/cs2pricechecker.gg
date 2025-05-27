@@ -9,6 +9,7 @@ module.exports = {
                 bg: "#0C141F",
                 mediumbg: "#151B2A",
                 lightbg: "#1B2337",
+                lighterbg: "#313e5e",
                 text: "#FFFFFF",
             },
             keyframes: {

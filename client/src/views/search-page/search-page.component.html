@@ -1,1 +1,21 @@
-<p>search-page works!</p>
+<div class="w-full h-full flex flex-col px-[var(--side-padding)] py-16 items-center">
+    <h1 class="text-center font-semibold text-xl">Results for "{{ query }}"</h1>
+
+    <div class="w-full flex flex-col gap-2 mt-16">
+        <h2 class="text-base font-semibold">Users</h2>
+        <div class="flex w-full overflow-y-auto gap-6 snap-x snap-mandatory pb-3 custom-scrollbar">
+            @for (user of userResults$ | async; track user.id) {
+                <app-user-card class="snap-start" [user]="user" />
+            }
+        </div>
+    </div>
+
+    <div class="w-full flex flex-col gap-2 mt-12">
+        <h2 class="text-base font-semibold">Skins</h2>
+        <div class="flex flex-wrap w-full gap-6">
+            @for (skin of skinResults$ | async; track skin.id) {
+                <app-skin-card class="flex-grow" [skin]="skin" />
+            }
+        </div>
+    </div>
+</div>
