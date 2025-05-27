@@ -5,10 +5,14 @@
         width="1.25rem"
         height="1.25rem"
     ></app-icon>
-    <input
-        class="outline-none border-none bg-transparent focus:valid:opacity-100 opacity-50 transition-opacity duration-200 flex-grow text-sm"
-        required
-        type="text"
-        placeholder="Weapon name, skin, or user..."
-    />
+
+    <form class="w-full" (ngSubmit)="onSearch($event)">
+        <input
+            class="outline-none border-none bg-transparent focus:valid:opacity-100 opacity-50 transition-opacity duration-200 flex-grow text-sm"
+            type="text"
+            placeholder="Weapon name, skin, or user..."
+            name="search"
+            [(ngModel)]="search"
+        />
+    </form>
 </div>

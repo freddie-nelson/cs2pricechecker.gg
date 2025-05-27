@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { IconComponent } from "../icon/icon.component";
+import { environment } from "../../environments/environment";
 
 @Component({
     selector: "app-logo",
@@ -8,4 +9,6 @@ import { IconComponent } from "../icon/icon.component";
     templateUrl: "./logo.component.html",
     styleUrl: "./logo.component.scss",
 })
-export class LogoComponent {}
+export class LogoComponent {
+    appName = environment.appName;
+}

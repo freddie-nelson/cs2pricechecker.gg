@@ -18,5 +18,5 @@
 }
 
 body {
-    @apply bg-bg text-text w-full min-h-screen font-[Inter] selection:bg-primary selection:text-text;
+    @apply bg-bg text-text w-full min-h-screen font-[Inter,Arial,sans-serif] selection:bg-primary selection:text-text;
 }
