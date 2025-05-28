@@ -30,7 +30,7 @@
                     <img
                         src="/images/{{ market }}-logo.webp"
                         alt="{{ market }} Logo"
-                        class="h-full w-full object-contain absolute p-1.5 group-hover:opacity-100 transition-opacity duration-200 {{
+                        class="h-full w-full max-w-24 object-contain absolute p-1.5 group-hover:opacity-100 transition-opacity duration-200 {{
                             activeMarket === market ? 'opacity-100' : 'opacity-50'
                         }}"
                         width="100%"
@@ -40,6 +40,12 @@
             }
         </div>
 
-        <div class="flex flex-col w-full h-full bg-mediumbg rounded-md"></div>
+        <div class="flex flex-col w-full h-full bg-mediumbg rounded-md">
+            <app-price-chart
+                class="w-full h-full"
+                [prices]="$any(skin)[activeMarket + 'Prices']"
+                [startDate]="skin.priceStartDate"
+            />
+        </div>
     </div>
 </div>

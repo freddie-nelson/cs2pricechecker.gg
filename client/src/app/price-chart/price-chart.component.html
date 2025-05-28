@@ -1,0 +1,33 @@
+<div class="w-full h-full relative p-2.5" #container>
+    <div class="w-full flex gap-4 justify-between items-center">
+        <p class="text-base font-semibold">{{ prices[selected] | currency }}</p>
+        <p class="text-sm font-semibold opacity-50">{{ dates[selected] | date: "shortDate" }}</p>
+    </div>
+
+    <svg
+        attr.viewBox="0 0 {{ svgWidth }} {{ svgHeight }}"
+        class="w-full h-[80%] absolute bottom-0 left-0"
+        preserveAspectRatio="none"
+    >
+        <path
+            opacity="0.6"
+            [attr.d]="path"
+            fill="url(#chart-gradient)"
+            stroke="#E75B8E"
+            [attr.stroke-width]="svgWidth * 0.005"
+        />
+        <defs>
+            <linearGradient
+                id="chart-gradient"
+                [attr.x1]="svgWidth / 2"
+                y1="0"
+                [attr.x2]="svgWidth / 2"
+                [attr.y2]="svgHeight"
+                gradientUnits="userSpaceOnUse"
+            >
+                <stop stop-color="#FF176C" />
+                <stop offset="1" stop-color="#737373" stop-opacity="0" />
+            </linearGradient>
+        </defs>
+    </svg>
+</div>
