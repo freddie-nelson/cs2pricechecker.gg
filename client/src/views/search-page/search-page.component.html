@@ -4,8 +4,18 @@
     <div class="w-full flex flex-col gap-2 mt-16">
         <h2 class="text-base font-semibold">Users</h2>
         <div class="flex w-full overflow-y-auto gap-6 snap-x snap-mandatory pb-3 custom-scrollbar">
-            @for (user of userResults$ | async; track user.id) {
-                <app-user-card class="snap-start" [user]="user" />
+            @if (userResults$ | async; as userResults) {
+                @for (user of userResults; track user.id) {
+                    <app-user-card class="snap-start" [user]="user" />
+                } @empty {
+                    <div class="flex justify-center items-center w-full h-32">
+                        <p class="opacity-50 text-lg font-semibold">No users found</p>
+                    </div>
+                }
+            } @else {
+                @for (i of [1, 2, 3]; track i) {
+                    <app-skeleton-user-card />
+                }
             }
         </div>
     </div>
@@ -13,8 +23,18 @@
     <div class="w-full flex flex-col gap-2 mt-12">
         <h2 class="text-base font-semibold">Skins</h2>
         <div class="flex flex-wrap w-full gap-6">
-            @for (skin of skinResults$ | async; track skin.id) {
-                <app-skin-card class="flex-grow" [skin]="skin" />
+            @if (skinResults$ | async; as skinResults) {
+                @for (skin of skinResults; track skin.id) {
+                    <app-skin-card class="flex-grow" [skin]="skin" />
+                } @empty {
+                    <div class="flex justify-center items-center w-full h-32">
+                        <p class="opacity-50 text-lg font-semibold">No skins found</p>
+                    </div>
+                }
+            } @else {
+                @for (i of [1, 2, 3]; track i) {
+                    <app-skeleton-skin-card class="flex-grow" />
+                }
             }
         </div>
     </div>

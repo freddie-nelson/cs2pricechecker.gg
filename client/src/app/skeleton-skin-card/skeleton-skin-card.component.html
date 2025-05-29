@@ -1,0 +1,13 @@
+<div class="w-full min-w-xl h-[17rem] flex gap-2 rounded-md p-2 bg-lightbg">
+    <div class="relative p-2 h-full aspect-square rounded-md bg-lighterbg animate-pulse overflow-hidden"></div>
+
+    <div class="flex flex-col gap-2 flex-grow">
+        <div class="flex gap-2">
+            @for (market of markets; track market) {
+                <div class="w-full h-10 bg-lighterbg animate-pulse rounded-md"></div>
+            }
+        </div>
+
+        <div class="w-full h-full bg-lighterbg animate-pulse rounded-md"></div>
+    </div>
+</div>

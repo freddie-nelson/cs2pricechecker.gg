@@ -4,11 +4,13 @@ import { Observable } from "rxjs";
 import { UserCardComponent } from "../../app/user-card/user-card.component";
 import { AsyncPipe } from "@angular/common";
 import { SkinCardComponent } from "../../app/skin-card/skin-card.component";
+import { SkeletonUserCardComponent } from "../../app/skeleton-user-card/skeleton-user-card.component";
+import { SkeletonSkinCardComponent } from "../../app/skeleton-skin-card/skeleton-skin-card.component";
 
 @Component({
     selector: "app-search-page",
     standalone: true,
-    imports: [UserCardComponent, AsyncPipe, SkinCardComponent],
+    imports: [UserCardComponent, AsyncPipe, SkinCardComponent, SkeletonUserCardComponent, SkeletonSkinCardComponent],
     templateUrl: "./search-page.component.html",
     styleUrl: "./search-page.component.scss",
 })
