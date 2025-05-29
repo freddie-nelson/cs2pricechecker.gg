@@ -1,8 +1,9 @@
 import { Component, Input } from "@angular/core";
 import { IconComponent } from "../icon/icon.component";
 import { FormsModule } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { SizeLarge, SizeMedium } from "../../types/size";
+import { Subscription } from "rxjs";
 
 @Component({
     selector: "app-search-bar",
@@ -16,7 +17,24 @@ export class SearchBarComponent {
 
     search: string = "";
 
-    constructor(private router: Router) {}
+    private queryParamSubscription: Subscription | null = null;
+
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+    ) {}
+
+    ngOnInit() {
+        this.queryParamSubscription = this.route.queryParamMap.subscribe((params) => {
+            this.search = params.get("q") || "";
+        });
+    }
+
+    ngOnDestroy() {
+        if (this.queryParamSubscription) {
+            this.queryParamSubscription.unsubscribe();
+        }
+    }
 
     onSearch(event: Event): void {
         event.preventDefault();
