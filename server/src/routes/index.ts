@@ -4,6 +4,7 @@ import { errorResponse, successResponse } from "../helpers/response";
 import { zodErrorToUserFriendlyMessage } from "../helpers/zod";
 import SteamWebApiService from "../services/SteamWebApi";
 import { SteamProfileWithInventory } from "../types/SteamProfile";
+import { ratelimitIp } from "../middlewares/ratelimit";
 
 export const rootRouter = new Router({
   prefix: "",
@@ -14,7 +15,7 @@ rootRouter.get("hello", "/hello", async (ctx) => {
   ctx.status = 200;
 });
 
-rootRouter.get("users", "/users", async (ctx) => {
+rootRouter.get("users", "/users", ratelimitIp("users", 3, 60000, true), async (ctx) => {
   const query = ctx.query.query as string;
   const { success, data: search, error } = querySchema.safeParse(query);
   if (!success) {
@@ -39,7 +40,7 @@ rootRouter.get("users", "/users", async (ctx) => {
   return successResponse(ctx, profilesWithInventories);
 });
 
-rootRouter.get("skins", "/skins", async (ctx) => {
+rootRouter.get("skins", "/skins", ratelimitIp("users", 3, 60000, true), async (ctx) => {
   const query = ctx.query.query as string;
   const { success, data: search, error } = querySchema.safeParse(query);
   if (!success) {
