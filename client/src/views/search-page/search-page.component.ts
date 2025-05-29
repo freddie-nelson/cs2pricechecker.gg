@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
 import ApiService, { SkinSearchResult, UserSearchResult } from "../../services/api.service";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { UserCardComponent } from "../../app/user-card/user-card.component";
 import { AsyncPipe } from "@angular/common";
 import { SkinCardComponent } from "../../app/skin-card/skin-card.component";
 import { SkeletonUserCardComponent } from "../../app/skeleton-user-card/skeleton-user-card.component";
 import { SkeletonSkinCardComponent } from "../../app/skeleton-skin-card/skeleton-skin-card.component";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "app-search-page",
@@ -19,19 +20,26 @@ export class SearchPageComponent {
     userResults$!: Observable<UserSearchResult[]>;
     skinResults$!: Observable<SkinSearchResult[]>;
 
-    @Input()
-    set q(query: string) {
-        this.query = query;
+    queryParamSubscription: Subscription | null = null;
+
+    constructor(
+        private apiService: ApiService,
+        private route: ActivatedRoute,
+    ) {
+        this.queryParamSubscription = this.route.queryParamMap.subscribe((params) => {
+            this.query = params.get("q") || "";
+            if (!this.query) {
+                return;
+            }
+
+            this.userResults$ = this.apiService.getUserSearchResults(this.query);
+            this.skinResults$ = this.apiService.getSkinSearchResults(this.query);
+        });
     }
 
-    constructor(private apiService: ApiService) {}
-
-    ngOnInit() {
-        if (!this.query) {
-            return;
+    ngOnDestroy() {
+        if (this.queryParamSubscription) {
+            this.queryParamSubscription.unsubscribe();
         }
-
-        this.userResults$ = this.apiService.getUserSearchResults(this.query);
-        this.skinResults$ = this.apiService.getSkinSearchResults(this.query);
     }
 }

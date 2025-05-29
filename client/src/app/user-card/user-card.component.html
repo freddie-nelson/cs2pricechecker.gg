@@ -7,8 +7,10 @@
         height="256px"
     />
 
-    <div class="flex flex-col gap-1.5">
-        <p class="text-base font-semibold">{{ user.name }}</p>
+    <div class="flex flex-col gap-1.5 overflow-hidden">
+        <p class="text-base font-semibold overflow-hidden text-ellipsis whitespace-nowrap line-clamp-1 w-full block">
+            {{ user.name }}
+        </p>
 
         @for (market of markets; track market) {
             <div class="flex items-center gap-1.5">
