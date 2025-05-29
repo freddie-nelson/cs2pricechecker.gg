@@ -1,4 +1,9 @@
-<div class="w-full h-full relative p-2.5" #container>
+<div
+    class="w-full h-full relative p-2.5 overflow-hidden group"
+    #container
+    (mouseleave)="onMouseLeave()"
+    (mousemove)="onMouseMove($event)"
+>
     <div class="w-full flex gap-4 justify-between items-center">
         <p class="text-base font-semibold">{{ prices[selected] | currency }}</p>
         <p class="text-sm font-semibold opacity-50">{{ dates[selected] | date: "shortDate" }}</p>
@@ -6,15 +11,24 @@
 
     <svg
         attr.viewBox="0 0 {{ svgWidth }} {{ svgHeight }}"
-        class="w-full h-[80%] absolute bottom-0 left-0"
-        preserveAspectRatio="none"
+        class="w-full h-full absolute bottom-0 left-0 overflow-visible"
+        preserveAspectRatio="xMidYMid meet"
     >
+        <ellipse
+            class="group-hover:opacity-100 opacity-0 transition-opacity duration-200"
+            [attr.cx]="selectedX"
+            [attr.cy]="selectedY"
+            [attr.rx]="svgHeight * 0.03"
+            [attr.ry]="svgHeight * 0.03"
+            fill="#E75B8E"
+        />
+
         <path
             opacity="0.6"
             [attr.d]="path"
             fill="url(#chart-gradient)"
             stroke="#E75B8E"
-            [attr.stroke-width]="svgWidth * 0.005"
+            [attr.stroke-width]="svgHeight * 0.015"
         />
         <defs>
             <linearGradient

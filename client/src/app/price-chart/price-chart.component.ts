@@ -15,10 +15,14 @@ export class PriceChartComponent {
     selected: number = 0;
 
     @ViewChild("container", { static: true }) container!: ElementRef<HTMLDivElement>;
-    readonly svgWidth: number = 1000;
+    svgWidth: number = 1000;
     svgHeight: number = 200;
 
     private _observer: ResizeObserver | null = null;
+
+    get maxY(): number {
+        return this.svgHeight * 0.8;
+    }
 
     get dates(): Date[] {
         const dates: Date[] = [];
@@ -39,7 +43,7 @@ export class PriceChartComponent {
 
         for (let i = 0; i < this.prices.length; i++) {
             const x = i * stepX;
-            const y = this.svgHeight - (this.prices[i] / maxPrice) * this.svgHeight;
+            const y = this.svgHeight - (this.prices[i] / maxPrice) * this.maxY;
 
             p += ` L ${x},${y}`;
         }
@@ -49,7 +53,21 @@ export class PriceChartComponent {
         return p;
     }
 
+    get selectedX(): number {
+        const stepX = this.svgWidth / (this.prices.length - 1);
+        return this.selected * stepX;
+    }
+
+    get selectedY(): number {
+        const maxPrice = Math.max(...this.prices);
+        return this.svgHeight - (this.prices[this.selected] / maxPrice) * this.maxY;
+    }
+
     constructor(private zone: NgZone) {}
+
+    ngOnInit() {
+        this.selected = this.prices.length - 1;
+    }
 
     ngAfterViewInit() {
         if (this.container) {
@@ -61,7 +79,8 @@ export class PriceChartComponent {
 
                 if (width > 0 && height > 0) {
                     this.zone.run(() => {
-                        this.svgHeight = this.svgWidth * (height / width);
+                        this.svgWidth = width;
+                        this.svgHeight = height;
                     });
                 }
             });
@@ -75,5 +94,17 @@ export class PriceChartComponent {
             this._observer.disconnect();
             this._observer = null;
         }
+    }
+
+    onMouseMove(event: MouseEvent) {
+        const rect = this.container.nativeElement.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+
+        const stepX = rect.width / (this.prices.length - 1);
+        this.selected = Math.max(0, Math.min(this.prices.length - 1, Math.round(x / stepX)));
+    }
+
+    onMouseLeave() {
+        this.selected = this.prices.length - 1;
     }
 }
